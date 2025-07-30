@@ -1,0 +1,132 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+
+.footer .icon-link {
+    font-size: 25px;
+    color: #000;
+}
+
+.link-block a {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.dnerf {
+  font-variant: small-caps;
+}
+
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.teaser {
+  font-family: 'Google Sans', sans-serif;
+}
+
+
+.publication-title {
+}
+
+.publication-banner {
+  max-height: parent;
+
+}
+
+.publication-banner video {
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: none;
+  object-fit: fit;
+}
+
+.publication-header .hero-body {
+}
+
+.publication-title {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors {
+}
+
+.publication-authors a {
+   color: hsl(204, 86%, 53%) !important;
+}
+
+.publication-authors a:hover {
+    text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.publication-video {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+
+    overflow: hidden;
+    border-radius: 10px !important;
+}
+
+.publication-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.logo-img {
+  margin-top: 0.5em;
+  padding-top: 0.25em;
+  position: relative;
+}
+
+.logo-img > img {
+  height: 2.75em;
+  padding-left: 0.75em;
+}
+
+.logo-img > sup {
+  position: absolute;
+  top: -0.5em; /* Adjust this value as needed */
+}
+
+.is-max-tablet {
+  max-width: 750px;
+}
+
+.main-result-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-result-column figure {
+  width: 100%;
+}
+
+.main-result-column.vertical-result figure {
+  width: 60%;
+}
+
+.main-result-column figure img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.result-legend img {
+  max-height: 6em;
+}

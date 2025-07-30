@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="GRASPLAT: Enabling dexterous grasping through novel view synthesis">
+  <meta name="keywords" content="GRASPLAT, 3DGS, grasp prediction, novel view synthesis, 3D Gaussian Splatting">
+  <meta name="author" content="Matteo Bortolon, Nuno Ferreira Duarte, Plinio Moreno, Fabio Poiesi, José Santos-Victor, Alessio Del Bue">
+  <meta name="copyright" content="Copyright 2025 Matteo Bortolon, Nuno Ferreira Duarte, Plinio Moreno, Fabio Poiesi, José Santos-Victor, Alessio Del Bue">
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow">
+  <meta name="google" content="notranslate">
+  <meta name="theme-color" content="#00d1b2">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="GRASPLAT">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="GRASPLAT">
+  <meta name="msapplication-TileColor" content="#00d1b2">
+  <meta name="msapplication-TileImage" content="./static/images/favicon.ico">
+  <meta name="msapplication-config" content="./static/images/browserconfig.xml">
+  <meta name="msapplication-starturl" content="./index.html">
+  <meta name="msapplication-navbutton-color" content="#00d1b2">
+  <meta name="msapplication-tooltip" content="GRASPLAT: Enabling dexterous grasping through novel view synthesis">
+  <meta name="msapplication-task" content="name=Home;action-uri=./index.html;icon-uri=./static/images/favicon.ico">
+  <meta name="msapplication-task" content="name=Research;action-uri=./index.html#research;icon-uri=./static/images/favicon.ico">
+  <meta name="msapplication-task" content="name=Publications;action-uri=./index.html#publications;icon-uri=./static/images/favicon.ico">
+  <meta name="msapplication-task" content="name=Contact;action-uri=./index.html#contact;icon-uri=./static/images/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GRASPLAT</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3PFZBJX7MJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-3PFZBJX7MJ');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans"
+        rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <!-- <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css"> -->
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.ico">
+
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <!-- <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script> -->
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">GRASPLAT: Enabling dexterous grasping through novel view synthesis</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://mbortolon97.github.io/" target="_blank">Matteo Bortolon</a><sup>1,2,4</sup>,</span>
+            <span class="author-block">
+              <a href="https://nunoduarte.github.io/" target="_blank">Nuno Ferreira Duarte</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://wp.isr.tecnico.ulisboa.pt/pliniomoreno/" target="_blank">Plinio Moreno</a><sup>3</sup>,
+            </span></br>
+            <span class="author-block">
+              <a href="https://fabiopoiesi.github.io/" target="_blank">Fabio Poiesi</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://users.isr.ist.utl.pt/~jasv/" target="_blank">José Santos-Victor</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.iit.it/it/people-details/-/people/alessio-delbue" target="_blank">Alessio Del Bue</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block logo-img"><sup>1</sup><img src="./static/logos/fbk.png">,</span>
+            <span class="author-block logo-img"><sup>2</sup><img src="./static/logos/pavis.png">,</span>
+            <span class="author-block logo-img"><sup>3</sup><img src="./static/logos/isr.png">,</span>
+            <span class="author-block logo-img"><sup>4</sup><img src="./static/logos/unitn.png"></span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://youtu.be/znH6MZe2iNw"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+
+                <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark disable" disabled>
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (Coming Soon)</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark disable" disabled>
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Dataset (Coming Soon)</span>
+                  </a>
+                </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container">
+    <div class="hero-body has-text-centered">
+      <figure class="is-inline-block is-max-tablet">
+        <img src="./static/images/teaser.webp">
+      </figure>
+      <h2 class="subtitle has-text-centered">
+        Our <i>GRASPLAT</i> method combines the precision of 3D grasping predictors with the accessibility of RGB-based approaches.
+        Conventional 3D grasping models <b>(left)</b> require an object scan (e.g., point cloud) for precise hand pose estimation, consequently making them difficult to use in real-world scenarios.
+        RGB-based grasping models <b>(right)</b> eliminate the need for explicit 3D scans but suffer from reduced accuracy.
+        <i>GRASPLAT</i> <b>(center)</b> bridges this gap by leveraging novel view synthesis to supervise a grasp predictor that operates directly on RGB images.
+        This enables high-precision grasping without requiring object scans, significantly improving efficiency and practicality.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+            <p>
+            Dexterous robotic grasping with multi-fingered hands remains a significant challenge in robotics.
+            We propose <i>GRASPLAT</i>, a novel approach that combines the usability of RGB methods with the accuracy of 3D techniques through advanced Novel View Synthesis (NVS).
+            </p>
+            <p>
+            Our key insight is that by synthesizing physically plausible images of a hand grasping an object, we can accurately regress corresponding hand joint configurations for successful grasps without requiring complete 3D scans during inference.
+            </p>
+            <p>
+            <i>GRASPLAT</i> leverages 3D Gaussian Splatting to generate high-fidelity novel views of real hand-object interactions, enabling end-to-end training with RGB data. Our approach compares rendered novel views with actual grasp appearances using photometric loss, minimizing discrepancies between rendered and real images.
+            </p>
+            <p>
+            Extensive experiments on both synthetic and real-world datasets demonstrate that <i>GRASPLAT</i> improves grasp success rates by <b>up to 36.9%</b> compared to existing image-based methods.
+            </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/znH6MZe2iNw?si=cg2guJtk51a1gnTb&rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Method. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method</h2>
+        <figure class="is-inline-block">
+          <img src="./static/images/diagram_w_nvs.webp">
+        </figure>
+        <div class="content has-text-justified">
+          <p>
+            <i>GRASPLAT</i> predicts 3D hand poses from a single RGB image using a frozen, denoised DINOv2 backbone.
+            The extracted feature map is processed by a spatial transformer to estimate hand parameters, which are then refined by an MLP.
+            During training, a feedback mechanism based on 3D Gaussian Splatting (3DGS) refines predictions by comparing rendered and real images.
+            To accelerate training, 3DGS models are precomputed before training and then cached.
+            The rendered scene includes both the object and the articulated hand, posed according to the predicted parameters.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Method. -->
+  </div>
+</section>
+
+<!-- Results. -->
+<!--
+<section class="section">
+  <div class="container is-max-desktop">
+    
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Results</h2>
+        <div class="content has-text-justified">
+          <p>
+            Comparison of methods on the GRASPLAT (top) and YCB (bottom) datasets. Each row represents a different object.
+            For each of the compared methods, as well as for GRASPLAT, we present the results in the simulated environment.
+            Additionally, for our method, we also show qualitative image synthesis of our 3DGS model during training against the relative ground truth.
+          </p>
+        </div>
+        <h2 class="subtitle is-8"><b>Camera configurations</b></h2>
+        <div class="columns is-size-7 result-legend pb-3">
+          <div class="column">
+            <figure class="">
+              <img src="./static/images/qualitative_visualization/cameras/gt.png">
+              <figcaption>Ground Truth</figcaption>
+            </figure>
+          </div>
+          <div class="column">
+            <figure class="">
+              <img src="./static/images/qualitative_visualization/cameras/ours.png">
+              <figcaption>6DGS</figcaption>
+            </figure>
+          </div>
+          <div class="column">
+            <figure class="">
+              <img src="./static/images/qualitative_visualization/cameras/inerf_init.png">
+              <figcaption>iNeRF w/ pose prior</figcaption>
+            </figure>
+          </div>
+          <div class="column">
+            <figure class="">
+              <img src="./static/images/qualitative_visualization/cameras/inerf_random.png">
+              <figcaption>iNeRF w/o pose prior</figcaption>
+            </figure>
+          </div>
+          <div class="column">
+            <figure class="">
+              <img src="./static/images/qualitative_visualization/cameras/pinerf_wprior.png">
+              <figcaption>Parallel NeRF w/ pose prior</figcaption>
+            </figure>
+          </div>
+          <div class="column">
+            <figure class="">
+              <img src="./static/images/qualitative_visualization/cameras/pinerf_woprior.png">
+              <figcaption>Parallel NeRF w/o pose prior</figcaption>
+            </figure>
+          </div>
+          <div class="column">
+            <figure class="">
+              <img src="./static/images/qualitative_visualization/cameras/nemo_voge_init.png">
+              <figcaption>NeMo + VoGE w/ pose prior</figcaption>
+            </figure>
+          </div>
+          <div class="column">
+            <figure class="">
+              <img src="./static/images/qualitative_visualization/cameras/nemo_voge_random.png">
+              <figcaption>NeMo + VoGE w/o pose prior</figcaption>
+            </figure>
+          </div>
+        </div>
+        <hr class="mt-6"/>
+        <h2 class="subtitle is-4 mt-5"><b>Truck</b></h2>
+        <h2 class="subtitle is-6"><i>Tanks &amp; Temples</i></h2>
+        <div class="columns is-mobile">
+          <div class="column is-one-third">
+            <figure class="image">
+              <figcaption>Target image</figcaption>
+              <img src="./static/images/qualitative_visualization/render/gt_truck.png">
+            </figure>
+            <figure class="image">
+              <figcaption>Estimated NVS</figcaption>
+              <img src="./static/images/qualitative_visualization/render/pred_truck.png">
+            </figure>
+          </div>
+          <div class="column main-result-column">
+            <figure class="image">
+              <img src="./static/images/qualitative_visualization/truck.png">
+            </figure>
+          </div>
+        </div>
+        <hr/>
+        <h2 class="subtitle is-4 mt-5"><b>Counter</b></h2>
+        <h2 class="subtitle is-6"><i>Mip-NeRF 360&deg;</i></h2>
+        <div class="columns is-mobile">
+          <div class="column is-one-third">
+            <figure class="image">
+              <figcaption>Target image</figcaption>
+              <img src="./static/images/qualitative_visualization/render/gt_counter.png">
+            </figure>
+            <figure class="image">
+              <figcaption>Estimated NVS</figcaption>
+              <img src="./static/images/qualitative_visualization/render/pred_counter.png">
+            </figure>
+          </div>
+          <div class="column main-result-column">
+            <figure class="image">
+              <img src="./static/images/qualitative_visualization/counter.png">
+            </figure>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+</section>
+-->
+<!--/ Results. -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Dataset. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+      <h2 class="title is-3">GRASPLAT dataset sample</h2>
+      <div class="content has-text-centered">
+        <div class="is-inline-block is-max-tablet">
+          <video id="randomVideo" width="70%" height="auto" loop muted autoplay playsinline>
+            <source src="./static/data_videos/0bb8a527277141338234cbe32dada981.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <figcaption class="has-text-centered mt-2">
+            Sample video from the GRASPLAT dataset showing various hand-object interactions.
+            The video is randomly selected from a subset of 30 videos with different objects, if you refresh the page you will see a different video.
+          </figcaption>
+        </div>
+      </div>
+      </div>
+    </div>
+    <!--/ Dataset. -->
+  </div>
+</section>
+-->
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const videoFiles = [
+      '008522dcbcc44c53b2a3613ce72acc6a.mp4',
+      '07a2a1e5782d4302b5610a93084faf9d.mp4',
+      '0bb8a527277141338234cbe32dada981.mp4',
+      '0c9c296512f849e6b0c7a4230ca0469d.mp4',
+      '16c8fd53afab448f818482b89801eb05.mp4',
+      '1bc76f64314744a9bf431dec05fe7ef7.mp4',
+      '1ecc04eb85b14f46a398316586de6308.mp4',
+      '297effdf3f7f486cae2f8648665ccce8.mp4',
+      '301bfa7389ef412ebe4143781ed1f666.mp4',
+      '340729ffec2348c98ec74846dfb29ac8.mp4',
+      '49184b6706394beebb7227ae4c999ddb.mp4',
+      '6a780ce012f3446c82a811270d7ea83f.mp4',
+      '6f65266bd7324836a84a10ef7e08a31a.mp4',
+      '77d23ee4382f488eb2de25ecd0a2cf2d.mp4',
+      '7b2f7373c6904a32a76a9b9730983ccf.mp4',
+      '837c4dfe1d964c93ab936969bf06fbd8.mp4',
+      '90478ab0af4f4853abc0a1781ba48dfb.mp4',
+      '9127b5f3e7804e8189f11800de875760.mp4',
+      '933ad3c84ae74eef86761774c3536a4d.mp4',
+      '93e5d017f3ee4dda9a29c0f7a16ef3b8.mp4',
+      '98b48acc4bb549e0b9cd32317805b992.mp4',
+      '9b6e0757fcbd4d93b90f76aa9f7763bb.mp4',
+      '9de24c7d03f84612a3e5d1ae2899261f.mp4',
+      'a3b2b9efdc194d2e84970e099008bc5f.mp4',
+      'a485d2261c3741f38fff7d0ef8227520.mp4',
+      'b9b0dbe871fa45c4b46fe0c0841945f1.mp4',
+      'baddb68ba030434fbaa162e56f11edf3.mp4',
+      'c06d247cf3ec42d09220b5e8b86b4e80.mp4',
+      'c8542c20443946c1b62413edce41c76c.mp4',
+      'c9962a49faad4ac6946094da352a67a6.mp4',
+      'cd0e10e55ebf486eaf9c0a7bcb2cf0ab.mp4',
+      'cf860a30743f4fc7a849732488a9005f.mp4',
+      'df4df16c0b7d4125ac58390c6ff90853.mp4',
+      'e642b04969d4425db1b6c07f367e79e4.mp4',
+      'f37ff52ce7894d728e1073b26010266a.mp4',
+      'f46f4038d27c4bfda52bcac33e478cb0.mp4',
+      'f7371fd3da6e45949adcde8f887009dc.mp4',
+      'f8ea296ccbf04b6394dd78f591009e69.mp4',
+      'f95cfb6d427d4d05bf06f375f5cfbff8.mp4',
+      'fbc0caec6f6949c3a0f679458d02cee5.mp4',
+    ];
+    
+    // Select a random video
+    const randomIndex = Math.floor(Math.random() * videoFiles.length);
+    const selectedVideo = videoFiles[randomIndex];
+    
+    // Update video source
+    const videoElement = document.getElementById('randomVideo');
+    const sourceElement = videoElement.querySelector('source');
+    sourceElement.src = `./static/data_videos/${selectedVideo}`;
+    
+    // Load the new video
+    videoElement.load();
+  });
+</script>
+
+<!--/ Results. -->
+<section class="section" id="acknowledgments">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Acknowledgments</h2>
+    <div class="content has-text-justified">
+      <p>
+        This project received support from the H2020 EU project RePAIR (Grant Agreement n&deg; 964854), the Center for Responsible AI, and MPR-2023-12- SACCCT Project 14935 AI.PackBot.<br/>
+        This work was made during an internship of the first author in IST, Lisbon. 
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@misc{bortolon2025grasplat,
+  title={GRASPLAT: Enabling dexterous grasping through novel view synthesis},
+  author={Bortolon, Matteo and Duarte, Nuno Ferreira and Moreno, Plinio and Poiesi, Fabio and Santos-Victor, José and Del Bue, Alessio},
+  year={2025},
+  eprint={},
+  archivePrefix={arXiv},
+  primaryClass={cs.RO}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-Share Alike 4.0 International License</a>.
+            The webpage template is from <a href="https://nerfies.github.io/">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
